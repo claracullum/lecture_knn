@@ -17,10 +17,18 @@ pandas.get_dummies(data, columns = ["Sex"])
 data = data.values 
 # print(data)
 
-machine = KNeighborsRegressor(n_neighbors=10, weights="uniform")
-
 #true is bc its continuous 
-return_values = kfold_template.run_kfold(machine, data, target, 4, True)
-average_return_value = sum(return_values)/len(return_values)
-print(return_values)
+
+trials = []
+for w in ["uniform","distance"]
+	for k in range(1,50):
+		machine = KNeighborsRegressor(n_neighbors=10, weights="uniform")
+		return_values = kfold_template.run_kfold(machine, data, target, 4, True)
+		average_return_value = sum(return_values)/len(return_values)
+		# print(average_return_values)
+		trials.append((average_return_value, k, w))
+
+# 0 is the first element of trials.append (average_return_value)
+trials.sort(key=lambda x: x[0])
+print(trials[:5])
 
